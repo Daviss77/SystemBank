@@ -2,10 +2,13 @@ package org.example.model.users;
 
 public class User {
     private static int increment = 1;
-    private int id;
+    private Integer id;
     private String username;
     private String email;
     private String password;
+    public RoleUsers role;
+
+    public User(){};
 
     public User(String username, String email, String password) {
         this.id = increment++;
@@ -14,7 +17,7 @@ public class User {
         this.password = password;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -40,6 +43,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public RoleUsers getRole() {
+        return role;
+    }
+    public void setRole(RoleUsers role) {
+        this.role = role;
     }
 
     @Override
