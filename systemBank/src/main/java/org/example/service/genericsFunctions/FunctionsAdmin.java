@@ -21,6 +21,7 @@ public class FunctionsAdmin extends AccountGenerics<User> {
                 }
                 // 2. Se não tem ID mas tem Email, compara Emails
                 if (criteria.getEmail() != null) {
+                    System.out.println("E-mail not found!");
                     return criteria.getEmail().equalsIgnoreCase(t.getEmail());
                 }
                 // 3. Se o objeto de critério estiver vazio, não filtra nada
