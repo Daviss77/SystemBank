@@ -40,7 +40,7 @@ public class Login {
             do{
                 counter++;
 
-                    if (fGenerics.searchAccounts(user.getPassword()).equals(null)){
+                    if (fGenerics.searchAccounts(User pass){
                         System.out.println("Invalid password");
                         System.out.println("One more try");
                     }

@@ -2,6 +2,7 @@ package org.example.service;
 
 import org.example.model.users.User;
 import org.example.service.Login.Login;
+import org.example.service.genericsFunctions.FunctionsAdmin;
 import org.example.service.serviceGlobalMethod.Input;
 
 import java.io.IOException;
@@ -21,7 +22,10 @@ public class ServiceStartAccount {
         String password = Input.reader.readLine();
 
         System.out.println("Welcome to your account service");
-        return new User(name,email,password);
+        FunctionsAdmin addAccount = new FunctionsAdmin();
+        User userNew = new User(name,email,password);
+        addAccount.addAccount(userNew);
+        return userNew;
     }
 
 

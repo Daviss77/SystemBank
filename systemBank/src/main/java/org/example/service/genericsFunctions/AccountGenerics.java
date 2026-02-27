@@ -4,8 +4,10 @@ package org.example.service.genericsFunctions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccountGenerics<T>  {
-    private List<T> list;
+import org.example.model.users.User;
+
+public class AccountGenerics<T extends User>  {
+    private List<User> list;
 
 
     public AccountGenerics(){
