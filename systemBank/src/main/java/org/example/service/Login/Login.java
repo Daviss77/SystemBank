@@ -19,8 +19,8 @@ public class Login {
         String email = Input.reader.readLine();
         
         //VALIDAR A FUNÇÃO CADASTRO
-        User user = fAdmin.findByEmail(email).orElse(null);
-            if (user == null){
+        
+            if (fAdmin.findByEmail(email) == null){
                 System.out.println("Email not found... Creating Account");
                 ServiceStartAccount c = new ServiceStartAccount();
                 c.createUser();
