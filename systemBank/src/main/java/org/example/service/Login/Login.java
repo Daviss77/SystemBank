@@ -3,53 +3,60 @@ package org.example.service.Login;
 import java.io.IOException;
 
 
+import org.example.controller.ControllerStartSystem;
 import org.example.model.users.User;
 import org.example.service.ServiceStartAccount;
-import org.example.service.genericsFunctions.AccountGenerics;
-import org.example.service.genericsFunctions.FunctionsAdmin;
+import org.example.service.genericsFunctions.ServiceCrudGenerics;
+import org.example.service.genericsFunctions.ServiceGeneSearchAccount;
 import org.example.service.serviceGlobalMethod.Input;
 
 public class Login {
     
-    FunctionsAdmin fAdmin = new FunctionsAdmin();
+    ServiceGeneSearchAccount search = new ServiceGeneSearchAccount();
+    ServiceCrudGenerics crudGenerics = new ServiceCrudGenerics();
     User user = new User();
-    //Ao buscar o email digitado, se não tiver é direcionado para createUser, caso tenha, verificação de senha. Transformar o login em boolean para retornar true para dar seguimento no sistema de verificação. Caso seja true acessa a conta. 3 tentativas
+
     public void login() throws IOException{
         System.out.println("To continue, please enter your email address: ");
         String email = Input.reader.readLine();
-        
+        var userFound = search.findByEmail(email);
+
         //VALIDAR A FUNÇÃO CADASTRO
-        
-            if (fAdmin.findByEmail(email) == null){
-                System.out.println("Email not found... Creating Account");
-                ServiceStartAccount c = new ServiceStartAccount();
-                c.createUser();
+            if (userFound.isEmpty()){
+                System.out.println("Email not found... Redirecting to  Account Creation");
+                ControllerStartSystem system = new ControllerStartSystem();
+                system.systemAccount();
+            }else {
+                User u =  userFound.get();
+
+                if(u != null && validationPassword(u)){
+                    System.out.println("Login successful! Welcome "+u.getEmail());
+
+                }else {
+                    System.out.println("Too many failed attempts. Account locked");
+                }
             }
-            validationPassword();
     }
 
-
-    //Criar o menu no controller para testar a validação do email. Neste menu terá duas opções: Login ou Criar conta.
-    //Criando a conta consigo validar a senha existente
-    //Depois criar o perfil ADM e dar continuade do crud simples.
-    private boolean validationPassword() throws IOException{
-        System.out.println("To continue, please enter your password: ");
-        String password = Input.reader.readLine();
-        AccountGenerics fGenerics = new AccountGenerics();
+    private boolean validationPassword(User userFound) throws IOException {
         int counter = 0;
-            do{
+        int maxAttempts = 3;
+
+        while (counter < maxAttempts) {
+            System.out.println("Enter your password (" + (maxAttempts - counter) + " attempts left): ");
+            String typedPassword = Input.reader.readLine();
+
+            // Compara a senha digitada com a senha do usuário
+            if (userFound.getPassword().equals(typedPassword)) {
+                System.out.println("Password Match!");
+                return true;
+            } else {
                 counter++;
-
-                    if (fGenerics.searchAccounts(User pass){
-                        System.out.println("Invalid password");
-                        System.out.println("One more try");
-                    }
-                    if (fGenerics.searchAccounts(user.getPassword()).equals(password)){
-                        System.out.println("Password Match");
-                        return true;
-                    }
-            }while (counter != 3);
-                    return false;
+                if (counter < maxAttempts) {
+                    System.out.println("Invalid password. Try again.");
+                }
+            }
+        }
+        return false;
     }
-
 }

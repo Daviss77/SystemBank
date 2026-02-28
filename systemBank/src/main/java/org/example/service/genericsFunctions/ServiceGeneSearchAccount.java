@@ -2,12 +2,11 @@ package org.example.service.genericsFunctions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.example.model.users.User;
 
-public class FunctionsAdmin extends AccountGenerics<User> {
-    List<User> list = new ArrayList<User>();
+public class ServiceGeneSearchAccount extends ServiceCrudGenerics<User> {
+    private static List<User> list = new ArrayList<User>();
 
 
         public Optional<User> findByID(Integer id) {
@@ -20,6 +19,10 @@ public class FunctionsAdmin extends AccountGenerics<User> {
             return list.stream()
                     .filter(u -> u.getEmail().equalsIgnoreCase(email))
                     .findFirst();
+        }
+
+        public void save(User user) {
+            list.add(user);
         }
 
 }

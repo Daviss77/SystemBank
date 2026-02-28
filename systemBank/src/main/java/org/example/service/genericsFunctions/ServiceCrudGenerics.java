@@ -6,11 +6,11 @@ import java.util.List;
 
 import org.example.model.users.User;
 
-public class AccountGenerics<T extends User>  {
+public class ServiceCrudGenerics<T extends User>  {
     private List<User> list;
 
 
-    public AccountGenerics(){
+    public ServiceCrudGenerics(){
         this.list = new ArrayList<>();
     }
 
@@ -18,7 +18,7 @@ public class AccountGenerics<T extends User>  {
             list.add(account);
     }
 
-    public List<T> searchAccounts(T item) {
+    public List<T> searchAccounts(T account) {
            return null;
     }
 
