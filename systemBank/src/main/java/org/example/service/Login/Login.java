@@ -19,8 +19,8 @@ public class Login {
         String email = Input.reader.readLine();
         
         //VALIDAR A FUNÇÃO CADASTRO
-        User user = fAdmin.findByEmail(email).orElse(null);
-            if (user == null){
+        
+            if (fAdmin.findByEmail(email) == null){
                 System.out.println("Email not found... Creating Account");
                 ServiceStartAccount c = new ServiceStartAccount();
                 c.createUser();
@@ -40,7 +40,7 @@ public class Login {
             do{
                 counter++;
 
-                    if (fGenerics.searchAccounts(user.getPassword()).equals(null)){
+                    if (fGenerics.searchAccounts(User pass){
                         System.out.println("Invalid password");
                         System.out.println("One more try");
                     }
