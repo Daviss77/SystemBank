@@ -31,7 +31,7 @@ public class Login {
 
                 if(u != null && validationPassword(u)){
                     System.out.println("Login successful! Welcome "+u.getEmail());
-
+                        //Leva para a tela "Access Account"
                 }else {
                     System.out.println("Too many failed attempts. Account locked");
                 }

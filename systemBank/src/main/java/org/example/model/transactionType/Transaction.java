@@ -8,19 +8,22 @@ import java.time.LocalDateTime;
 public class Transaction {
     private static int increment = 1;
     private int id;
-    private BigDecimal value;
+    private double value;
     private TypeTransaction type;
     private StatusTransaction status;
     private LocalDateTime dateCreated;
     private User user;
 
-    public Transaction(int id, BigDecimal value, TypeTransaction type, StatusTransaction status, LocalDateTime dateCreated, User user) {
+    public Transaction(int id, double value, TypeTransaction type, StatusTransaction status, LocalDateTime dateCreated, User user) {
         this.id = increment++;
         this.value = value;
         this.type = type;
         this.status = status;
         this.user = user;
         this.dateCreated = LocalDateTime.now();
+    }
+
+    public Transaction() {
     }
 
     public int getId() {
@@ -31,11 +34,9 @@ public class Transaction {
         return dateCreated;
     }
 
-    public BigDecimal getValue() {
-        return value;
-    }
+    public double getValue() {return value;}
 
-    public void setValue(BigDecimal value) {
+    public void setValue(double value) {
         this.value = value;
     }
 

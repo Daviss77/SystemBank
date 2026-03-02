@@ -1,15 +1,17 @@
 package org.example.model.accountType;
 
+import org.example.model.users.User;
+
 import java.math.BigDecimal;
 
-public class Account {
-    private BigDecimal bankBalance;
-    private BigDecimal deposit;
-    private BigDecimal withdraw;
+public class Account extends User {
+    private double bankBalance;
+    private double deposit;
+    private double withdraw;
     private StatusAccount status;
 
     public Account() {}
-    public Account(BigDecimal bankBalance, BigDecimal deposit, BigDecimal withdraw, StatusAccount status) {
+    public Account(double bankBalance, double deposit, double withdraw, StatusAccount status) {
         this.bankBalance = bankBalance;
         this.deposit = deposit;
         this.withdraw = withdraw;
@@ -24,27 +26,27 @@ public class Account {
         this.status = status;
     }
 
-    public BigDecimal getWithdraw() {
+    public double getWithdraw() {
         return withdraw;
     }
 
-    public void setWithdraw(BigDecimal withdraw) {
+    public void setWithdraw(double withdraw) {
         this.withdraw = withdraw;
     }
 
-    public BigDecimal getDeposit() {
+    public double getDeposit() {
         return deposit;
     }
 
-    public void setDeposit(BigDecimal deposit) {
+    public void setDeposit(double deposit) {
         this.deposit = deposit;
     }
 
-    public BigDecimal getBankBalance() {
+    public double getBankBalance() {
         return bankBalance;
     }
 
-    public void setBankBalance(BigDecimal bankBalance) {
+    public void setBankBalance(double bankBalance) {
         this.bankBalance = bankBalance;
     }
 }
