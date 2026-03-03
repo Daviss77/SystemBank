@@ -2,21 +2,17 @@ package org.example.service.Login;
 
 import java.io.IOException;
 
-
 import org.example.controller.ControllerStartSystem;
 import org.example.model.users.User;
-import org.example.service.ServiceStartAccount;
-import org.example.service.genericsFunctions.ServiceCrudGenerics;
 import org.example.service.genericsFunctions.ServiceGeneSearchAccount;
 import org.example.service.serviceGlobalMethod.Input;
 
 public class Login {
     
     ServiceGeneSearchAccount search = new ServiceGeneSearchAccount();
-    ServiceCrudGenerics crudGenerics = new ServiceCrudGenerics();
     User user = new User();
 
-    public void login() throws IOException{
+    public User login() throws IOException{
         System.out.println("To continue, please enter your email address: ");
         String email = Input.reader.readLine();
         var userFound = search.findByEmail(email);
@@ -29,13 +25,15 @@ public class Login {
             }else {
                 User u =  userFound.get();
 
-                if(u != null && validationPassword(u)){
-                    System.out.println("Login successful! Welcome "+u.getEmail());
-                        //Leva para a tela "Access Account"
-                }else {
-                    System.out.println("Too many failed attempts. Account locked");
-                }
+                    if(u != null && validationPassword(u)){
+                        System.out.println("Login successful! Welcome "+ u.getEmail());
+                        return u;
+                        
+                    }else {
+                        System.out.println("Too many failed attempts. Account locked");
+                    }
             }
+            return null;
     }
 
     private boolean validationPassword(User userFound) throws IOException {

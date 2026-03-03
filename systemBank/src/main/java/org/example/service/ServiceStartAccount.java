@@ -32,12 +32,4 @@ public class ServiceStartAccount {
         return newUser;
     }
 
-
-    public void validationAccount() throws  IOException{
-        System.out.println("WELCOME TO THE ACCOUNT SERVICE");
-        Login login = new Login();
-        login.login();
-
-    }
-
 }
