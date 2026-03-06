@@ -1,4 +1,4 @@
-package org.example.service.genericsFunctions;
+package org.example.service.serviceGenericsFunctions;
 
 
 import java.util.ArrayList;

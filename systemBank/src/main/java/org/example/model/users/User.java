@@ -1,14 +1,19 @@
 package org.example.model.users;
 
+import org.example.model.accountType.Account;
+
 public class User {
     private static int increment = 1;
     private Integer id;
     private String username;
     private String email;
     private String password;
-    public RoleUsers role;
+    private RoleUsers role;
+    private Account account;
 
-    public User(){};
+    public User(){
+        this.id = increment ++;
+    };
 
     public User(String username, String email, String password) {
         this.id = increment++;
@@ -52,6 +57,14 @@ public class User {
         this.role = role;
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
     @Override
     public String toString() {
         return "{ " +
@@ -60,4 +73,6 @@ public class User {
                 "\n E-MAIL: "  + this.email +
                 "\n }";
     }
+
+    
 }

@@ -1,6 +1,7 @@
 package org.example.controller.userController;
 
-import org.example.service.serviceFunctionsAccount.MenuOptionsUser;
+import org.example.model.users.User;
+import org.example.service.serviceFunctionsAccount.user.ServiceDepositMoney;
 import org.example.service.serviceGlobalMethod.Input;
 
 import java.io.IOException;
@@ -8,7 +9,11 @@ import java.io.IOException;
 
 
 public class ControllerAccessAccount {
-    protected MenuOptionsUser menu = new MenuOptionsUser();
+    private User userLogged;
+
+    public ControllerAccessAccount(User userLogged){
+        this.userLogged = userLogged;
+    }
 
     public void accessAccount() throws IOException {
 
@@ -19,7 +24,8 @@ public class ControllerAccessAccount {
         int opI = Integer.parseInt(opS);
             switch (opI){
                 case 1 -> {
-                    menu.depositMoney();
+                    ServiceDepositMoney deposit = new ServiceDepositMoney();
+                    deposit.deposit(userLogged);
                 }
         }
     }

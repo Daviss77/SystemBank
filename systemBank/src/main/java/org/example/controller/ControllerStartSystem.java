@@ -2,11 +2,10 @@ package org.example.controller;
 
 import java.io.IOException;
 
-import org.example.service.ServiceStartAccount;
-import org.example.service.Login.Login;
+import org.example.service.serviceLogin.Login;
 import org.example.service.serviceGlobalMethod.Input;
 import org.example.view.CreateAccountView;
-
+import org.example.controller.userController.*;
 public class ControllerStartSystem {
     
     CreateAccountView view = new CreateAccountView();
@@ -20,10 +19,11 @@ public class ControllerStartSystem {
                 switch (option) {
                     case 1 -> {
                         Login login = new Login();
-                        login.login();
-                    }  
+                        ControllerAccessAccount start = new ControllerAccessAccount(login.login());
+                        start.accessAccount();
+                    }
                     case 2 -> {
-                        ServiceStartAccount createUser = new ServiceStartAccount();
+                        ControllerInsertUser createUser = new ControllerInsertUser();
                         createUser.createUser();
                     }
                     case 3 -> {

@@ -1,16 +1,17 @@
-package org.example.service.Login;
+package org.example.service.serviceLogin;
 
 import java.io.IOException;
 
 import org.example.controller.ControllerStartSystem;
+import org.example.controller.userController.ControllerAccessAccount;
+import org.example.model.accountType.Account;
 import org.example.model.users.User;
-import org.example.service.genericsFunctions.ServiceGeneSearchAccount;
+import org.example.service.serviceGenericsFunctions.ServiceGeneSearchAccount;
 import org.example.service.serviceGlobalMethod.Input;
 
 public class Login {
     
     ServiceGeneSearchAccount search = new ServiceGeneSearchAccount();
-    User user = new User();
 
     public User login() throws IOException{
         System.out.println("To continue, please enter your email address: ");
@@ -26,9 +27,21 @@ public class Login {
                 User u =  userFound.get();
 
                     if(u != null && validationPassword(u)){
-                        System.out.println("Login successful! Welcome "+ u.getEmail());
-                        return u;
+                            System.out.println("Login successful! Welcome "+ u.getEmail());
                         
+                            var accountFound = search.findAccountByUser(u.getId());
+                                if(accountFound.isPresent()){
+                                    Account userAccount = accountFound.get();
+                                    System.out.println("Account found! Balance: " + userAccount.getBankBalance());
+                                }
+                                else{
+                                    System.out.println("Warning: No account associated with this user!");
+                                }
+
+                                ControllerAccessAccount accessAccount = new ControllerAccessAccount(u);
+                                accessAccount.accessAccount();
+
+                                return u;
                     }else {
                         System.out.println("Too many failed attempts. Account locked");
                     }
