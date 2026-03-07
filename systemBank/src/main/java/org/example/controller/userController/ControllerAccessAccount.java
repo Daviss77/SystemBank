@@ -2,6 +2,7 @@ package org.example.controller.userController;
 
 import org.example.model.users.User;
 import org.example.service.serviceFunctionsAccount.user.ServiceDepositMoney;
+import org.example.service.serviceFunctionsAccount.user.ServiceWithdrawMoney;
 import org.example.service.serviceGlobalMethod.Input;
 
 import java.io.IOException;
@@ -26,6 +27,10 @@ public class ControllerAccessAccount {
                 case 1 -> {
                     ServiceDepositMoney deposit = new ServiceDepositMoney();
                     deposit.deposit(userLogged);
+                }
+                case 2 -> {
+                    ServiceWithdrawMoney withdraw = new ServiceWithdrawMoney();
+                    withdraw.withdraw(userLogged);
                 }
         }
     }

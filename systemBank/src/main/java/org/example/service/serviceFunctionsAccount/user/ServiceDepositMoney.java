@@ -10,43 +10,22 @@ import org.example.service.serviceGlobalMethod.Input;
 import java.io.IOException;
 import java.util.Optional;
 
-public class ServiceDepositMoney extends Account {
+public class ServiceDepositMoney extends ServiceAccountTransaction {
 
-    // Transaction pega o valor > Account altera balancebank > function deposit realiza as alterações > Depois se criaria uma função de Extrato para mostrar o valor ataul
-    Transaction transaction = new Transaction();
-    ServiceGeneSearchAccount search = new ServiceGeneSearchAccount();
-    Input input = new Input();
-
-
-    //IMPLEMENTANDO MANEIRAS DE UTILIZAR O VALUE DE TRANSACTION PARA DEPOSITAR O VALOR E ATUALIZAR O BANKBALANCE
-
-    public void deposit(User userFound) throws IOException {
-        
-         Optional<Account> accountOpt = search.findAccountByUser(userFound.getId());
-        
-        if (accountOpt.isEmpty()) {
-            System.out.println("Error: Account not found for this user!");
-            return;
+        public void deposit(User userFound) throws IOException{
+            executeTransaction(userFound, "-- SELECT DEPOSIT -- ", 1.0);
         }
 
-        Account userAccount = accountOpt.get();
-
-        System.out.println("-- SELECT DEPOSIT --");
-        System.out.println("Deposit amount: ");
-        String insert = Input.reader.readLine();
-        transaction.setValue(input.convertStringToDouble(insert));
-        
-            if(transaction.getValue() > 0.0) {
-                double newBalance = userAccount.getBankBalance() + transaction.getValue();
-                userAccount.setBankBalance(newBalance);
-
-                System.out.println("Deposit successful! Amount: " + transaction.getValue());
-                System.out.println("New Balance: " + userAccount.getBankBalance());
-
-            }else{
-                System.out.println("Invalid amount. Deposit must be greater than zero.");
-                
+        @Override
+        public boolean validateTransaction(Account account, double amount) {
+            if(amount <= 0.0){
+                System.out.println("Invalid amount. Deposit amount must be greater than 0.");
+                return false;
             }
-
-    }
+            return true;
+        }
+        @Override
+        public String getSuccessMessage(double amount) {
+            return "Deposited success! Amount " + amount;
+        }
 }
