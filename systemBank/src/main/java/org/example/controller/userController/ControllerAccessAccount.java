@@ -2,6 +2,7 @@ package org.example.controller.userController;
 
 import org.example.model.users.User;
 import org.example.service.serviceFunctionsAccount.user.ServiceDepositMoney;
+import org.example.service.serviceFunctionsAccount.user.ServiceTransferMoney;
 import org.example.service.serviceFunctionsAccount.user.ServiceWithdrawMoney;
 import org.example.service.serviceGlobalMethod.Input;
 
@@ -31,6 +32,10 @@ public class ControllerAccessAccount {
                 case 2 -> {
                     ServiceWithdrawMoney withdraw = new ServiceWithdrawMoney();
                     withdraw.withdraw(userLogged);
+                }
+                case 3 -> {
+                    ServiceTransferMoney transfer = new ServiceTransferMoney();
+                    transfer.transfer(userLogged);
                 }
         }
     }
